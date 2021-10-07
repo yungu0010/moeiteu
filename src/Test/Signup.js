@@ -37,7 +37,7 @@ const SignUp = () => {
   );
   
   const _handleSignUpButtonPress = async() => {
-      //여기서 state 값들을 DB로 이동해 계정만듬
+    //여기서 state 값들을 DB로 이동해 계정만듬
     Alert.alert(`${name}님 환영합니다`); 
     Alert.alert(`name: ${name}, email: ${email},\npassword: ${password}, passwordConfirm: ${passwordConfirm}`);
   };

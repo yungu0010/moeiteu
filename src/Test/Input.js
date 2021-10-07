@@ -42,7 +42,7 @@ const SignupInput=forwardRef(
           maxLength={maxLength}
           autoCapitalize="none"
           autoCorrect={false}
-          underlineColorAndroid="transparent" // Android only
+          underlineColorAndroid="transparent"
           editable={!disabled}
         />
       </View> 

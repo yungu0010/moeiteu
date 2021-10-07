@@ -4,8 +4,13 @@ import Weather from './src/screens/Weather';
 import WeatherLoading from './src/screens/WeatherLoading';
 import * as Location from 'expo-location';
 import axios from 'axios';
+import Signup from './src/Test/Signup'
+import Login from './src/Test/Login'
+import styled from 'styled-components/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const API_KEY ="0378f839f05bd16fb2624b36317a1672";
+
 
 export default class extends React.Component { //class로 바꾼모습
   state={
@@ -46,10 +51,16 @@ export default class extends React.Component { //class로 바꾼모습
   }
 
   render(){
-    const { isLoading, temp, condition } = this.state;
-    return isLoading ? <WeatherLoading /> : 
-    (
-      <Weather temp={Math.round(temp)} condition={condition} />
-    );
+    // const { isLoading, temp, condition } = this.state;
+    // return isLoading ? <WeatherLoading /> : 
+    // (
+    //   <Weather temp={Math.round(temp)} condition={condition} />
+    // ); 
+    return(
+      <SafeAreaProvider style={{marginTop:50}}>
+        <Login />
+      </SafeAreaProvider>
+    )
   }
-}
+
+};

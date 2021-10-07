@@ -1,30 +1,8 @@
 import React, { useState, forwardRef } from 'react';
+import { View , Text, TextInput} from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
-const Container = styled.View`
-  flex-direction: column;
-  width: 100%;
-  margin: 10px 0;
-`;
-const Label = styled.Text`
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: ${({ theme, isFocused }) => (isFocused ? theme.text : theme.label)};
-`;
-const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
-  placeholderTextColor: theme.inputPlaceholder,
-}))`
-  background-color: ${({ theme, editable }) =>
-    editable ? theme.background : theme.inputDisabledBackground};
-  color: ${({ theme }) => theme.text};
-  padding: 20px 10px;
-  font-size: 16px;
-  border: 1px solid
-    ${({ theme, isFocused }) => (isFocused ? theme.text : theme.inputBorder)};
-  border-radius: 4px;
-`;
 
 // 아이디와 비밀번호 입력받도록함
 const Input = forwardRef(
@@ -46,9 +24,9 @@ const Input = forwardRef(
     const [isFocused, setIsFocused] = useState(false);
 
     return (
-      <Container>
-        <Label isFocused={isFocused}>{label}</Label>
-        <StyledTextInput
+      <View>
+        <Text isFocused={isFocused}>{label}</Text>
+        <TextInput
           ref={ref}
           isFocused={isFocused}
           value={value}
@@ -69,7 +47,7 @@ const Input = forwardRef(
           underlineColorAndroid="transparent" // Android only
           editable={!disabled}
         />
-      </Container>
+      </View>
     );
   }
 );

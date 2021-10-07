@@ -1,35 +1,14 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { ProgressContext, UserContext } from '../contexts';
-import styled from 'styled-components/native';
-import { Image, Input, Button } from '../components';
-import { images } from '../utils/images';
+// import { Input, Button } from '../components';
+import { Input } from '../components';
+import { View, Text, Button } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validateEmail, removeWhitespace } from '../utils/common';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Alert } from 'react-native';
-import { login } from '../utils/firebase';
-
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.background};
-  padding: 0 20px;
-  padding-top: ${({ insets: { top } }) => top}px;
-  padding-bottom: ${({ insets: { bottom } }) => bottom}px;
-`;
-const ErrorText = styled.Text`
-  align-items: flex-start;
-  width: 100%;
-  height: 20px;
-  margin-bottom: 10px;
-  line-height: 20px;
-  color: ${({ theme }) => theme.errorText};
-`;
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Login = ({ navigation }) => {
-  const { dispatch } = useContext(UserContext);
-  const { spinner } = useContext(ProgressContext);
+  // const { dispatch } = useContext(UserContext);
+  // const { spinner } = useContext(ProgressContext);
   const insets = useSafeAreaInsets();
 
   const [email, setEmail] = useState('');
@@ -59,29 +38,19 @@ const Login = ({ navigation }) => {
   };
 
   // 버튼이 눌렸을때
-  // const _handleLoginButtonPress = async () => {
-  //   try {
-  //     spinner.start();
-  //     const user = await login({ email, password });
-  //     dispatch(user);
-  //   } catch (e) {
-  //     Alert.alert('Login Error', e.message);
-  //   } finally {
-  //     spinner.stop();
-  //   }
-  // };
+  const _handleLoginButtonPress = async() => {
+    console.log("#@$##$@#$@#$")
+  };
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={{ flex: 1 }}
-      extraScrollHeight={20}
-    >
-      <Container insets={insets}>
-        {/* <Image url={images.logo} imageStyle={{ borderRadius: 8 }} />  firebase연동하는 부분*/}
+    
+    <KeyboardAwareScrollView>
+      <View insets={insets}>
+  
         <Input
           label="Email"
           value={email}
-          onChangeText={_handleEmailChange}
+          onChangeText={(_handleEmailChange)}
           onSubmitEditing={() => passwordRef.current.focus()}
           placeholder="Email"
           returnKeyType="next"
@@ -96,7 +65,7 @@ const Login = ({ navigation }) => {
           returnKeyType="done"
           isPassword
         />
-        <ErrorText>{errorMessage}</ErrorText>
+        <Text>{errorMessage}</Text>
         <Button
           title="Login"
           onPress={_handleLoginButtonPress}
@@ -105,9 +74,8 @@ const Login = ({ navigation }) => {
         <Button
           title="Sign up with email"
           onPress={() => navigation.navigate('Signup')}
-          isFilled={false}
         />
-      </Container>
+      </View>
     </KeyboardAwareScrollView>
   );
 };

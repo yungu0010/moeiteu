@@ -59,17 +59,17 @@ const Login = ({ navigation }) => {
   };
 
   // 버튼이 눌렸을때
-  const _handleLoginButtonPress = async () => {
-    try {
-      spinner.start();
-      const user = await login({ email, password });
-      dispatch(user);
-    } catch (e) {
-      Alert.alert('Login Error', e.message);
-    } finally {
-      spinner.stop();
-    }
-  };
+  // const _handleLoginButtonPress = async () => {
+  //   try {
+  //     spinner.start();
+  //     const user = await login({ email, password });
+  //     dispatch(user);
+  //   } catch (e) {
+  //     Alert.alert('Login Error', e.message);
+  //   } finally {
+  //     spinner.stop();
+  //   }
+  // };
 
   return (
     <KeyboardAwareScrollView
@@ -77,7 +77,7 @@ const Login = ({ navigation }) => {
       extraScrollHeight={20}
     >
       <Container insets={insets}>
-        <Image url={images.logo} imageStyle={{ borderRadius: 8 }} />
+        {/* <Image url={images.logo} imageStyle={{ borderRadius: 8 }} />  firebase연동하는 부분*/}
         <Input
           label="Email"
           value={email}

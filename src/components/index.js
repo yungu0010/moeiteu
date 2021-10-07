@@ -3,4 +3,4 @@ import Input from './Input';
 import Button from './Button';
 import Spinner from './Spinner';
 
-export { Image, Input, Button, Spinner };
+export { Input, Button, Spinner };  //Image뺐음

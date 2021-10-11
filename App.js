@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Alert } from 'react-native';
 import Weather from './src/screens/Weather';
 import WeatherLoading from './src/screens/WeatherLoading';
@@ -11,8 +11,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const API_KEY ="0378f839f05bd16fb2624b36317a1672";
 
+import axios from 'axios';
 
 export default class extends React.Component { //class로 바꾼모습
+  
+ 
+  
   state={
     isLoading:true
   };

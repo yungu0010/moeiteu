@@ -31,10 +31,8 @@ module.exports = class Mountain extends Sequelize.Model {
       collate: 'utf8mb4_general_ci',
     });
   }
-
   static associate(db) {
     db.Mountain.belongsToMany(db.User, { through: "Rating", foreignKey: "mountain_id", sourceKey: "id"});
     db.Mountain.belongsToMany(db.User, { through: "Record", foreignKey: "mountain_id", sourceKey: "id"});
-    
   }
 };

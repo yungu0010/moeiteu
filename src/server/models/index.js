@@ -16,20 +16,20 @@ db.sequelize = sequelize;
 db.User = User;
 db.Mountain = Mountain;
 db.Post = Post;
-
+db.Rating = Rating;
+db.Record= Record;
 
 User.init(sequelize);
 Mountain.init(sequelize);
 Post.init(sequelize);
+Rating.init(sequelize);
+Record.init(sequelize);
 
 User.associate(db);
 Mountain.associate(db);
 Post.associate(db);
-
-// Rating.init(sequelize);
-// Record.init(sequelize);
-// Rating.associate(db);
-// Record.associate(db);
+Rating.associate(db);
+Record.associate(db);
 
 module.exports = db;
 

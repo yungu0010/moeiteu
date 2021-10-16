@@ -43,7 +43,7 @@ const SignUp = () => {
   };
   
   return (
-    <View>
+    <View style={{marginTop:50}} >
       <SignupInput
         label="Name"
         value={name}

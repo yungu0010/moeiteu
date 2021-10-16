@@ -43,9 +43,8 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    
     <KeyboardAwareScrollView>
-      <View insets={insets}>
+      <View style={{marginTop:50}} insets={insets}>
   
         <Input
           label="Email"

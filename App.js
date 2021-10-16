@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Alert , StyleSheet, SafeAreaView} from 'react-native';
+import { Alert , StyleSheet, SafeAreaView, Text, View} from 'react-native';
 import Weather from './src/screens/Weather';
 import WeatherLoading from './src/screens/WeatherLoading';
 import * as Location from 'expo-location';
@@ -8,6 +8,8 @@ import Signup from './src/Test/Signup'
 import Login from './src/Test/Login'
 import styled from 'styled-components/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
+import { AuthScreen } from './src/screens';
 import Navigator from './Navigator';
 
 const API_KEY ="0378f839f05bd16fb2624b36317a1672";
@@ -56,11 +58,17 @@ export default class extends React.Component { //class로 바꾼모습
     // (
     //   <Weather temp={Math.round(temp)} condition={condition} />
     // ); 
+    // return(
+    //   <SafeAreaProvider>
+    //   <SafeAreaView style={styles.safeAreaView}>
+    //     <Navigator/>
+    //   </SafeAreaView>
+    //   </SafeAreaProvider>
+    // )
     return(
-      <SafeAreaProvider>
-      <SafeAreaView style={styles.safeAreaView}>
-        <Navigator/>
-      </SafeAreaView>
+      <SafeAreaProvider style={{marginTop:50}}>
+        <AuthScreen></AuthScreen>
+        <StatusBar style="auto"></StatusBar>
       </SafeAreaProvider>
     )
   }

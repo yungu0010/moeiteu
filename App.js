@@ -61,19 +61,19 @@ export default class extends React.Component { //class로 바꾼모습
   // }
 
   render(){
-    // if(this.state.isLoading){
-    //   return <Loading></Loading>
-    // }else{
-    //   return <AuthScreen></AuthScreen>
-    // }
+    if(this.state.isLoading){
+      return <Loading></Loading>
+    }else{
+      return <AuthScreen></AuthScreen>
+    }
     // const { isLoading, temp, condition } = this.state;
     // return isLoading ? <WeatherLoading /> : 
     // (
     //   <Weather temp={Math.round(temp)} condition={condition} />
     // ); 
-    return(
-      <Map></Map>
-    )
+    // return(
+    //   <Map></Map>
+    // )
   }
 };
 

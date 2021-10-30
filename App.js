@@ -11,9 +11,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Navigator from './Navigator';
 import Map from './src/Test/Map';
 import Loading from "./src/screens/Loading";
-import AuthScreen from "./src/screens/AuthScrren";
+import AuthScreen from "./src/screens/AuthScreen";
+import NavigatorScreen from './Navigator';
+import { NavigationContainer } from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack'
 
-
+const Stack = createStackNavigator();
 
 const API_KEY ="0378f839f05bd16fb2624b36317a1672";
 
@@ -64,7 +67,17 @@ export default class extends React.Component { //class로 바꾼모습
     if(this.state.isLoading){
       return <Loading></Loading>
     }else{
-      return <AuthScreen></AuthScreen>
+      return (
+        <SafeAreaView style={styles.safeAreaView}>
+    
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Auth">
+              <Stack.Screen name="Auth" component={AuthScreen} />
+              <Stack.Screen name="Main" component={NavigatorScreen}  options={{headerShown: false}}/>
+            </Stack.Navigator>
+          </NavigationContainer>
+          
+        </SafeAreaView>)
     }
     // const { isLoading, temp, condition } = this.state;
     // return isLoading ? <WeatherLoading /> : 
@@ -74,6 +87,9 @@ export default class extends React.Component { //class로 바꾼모습
     // return(
     //   <Map></Map>
     // )
+
+    
+  
   }
 };
 

@@ -1,10 +1,10 @@
-import { number } from "prop-types";
 import React, {useState} from "react";
 import {BottomNavigation} from "react-native-paper";
 import Login from './src/Test/Login';
 import Signup from './src/Test/Signup';
 import Map from './src/Test/Map';
 import WeatherScreen from "./src/Test/WeatherScreen";
+import Home from "./src/screens/Weather"
 
 export default function Navigator(){
     const [index, setIndex] = useState(0);
@@ -19,7 +19,7 @@ export default function Navigator(){
         // 여기 씬 있는데에 Test의 파일 넣으면 됨 Login, Signup 같은거 쓰면됨
         // 근데 Login, Signup넣으면 에러남
         scene1: Signup,
-        scene2: Login,
+        scene2: WeatherScreen,
         scene3: WeatherScreen,
         scene4: Map,
         scene5: Map,

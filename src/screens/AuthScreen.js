@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { render } from 'react-dom';
 import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, TextInput, Platform } from 'react-native';
 
 const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2.2:8080'; 
 
-const AuthScreen = () => {
+const AuthScreen = ({navigation}) => {
 
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
@@ -12,6 +13,7 @@ const AuthScreen = () => {
     const [isError, setIsError] = useState(false);
     const [message, setMessage] = useState('');
     const [isLogin, setIsLogin] = useState(true);
+
 
     const onChangeHandler = () => {
         setIsLogin(!isLogin);
@@ -30,6 +32,7 @@ const AuthScreen = () => {
             try {
                 const jsonRes = await res.json();
                 if (res.status === 200) {
+                    navigation.navigate('Main')
                     setMessage(jsonRes.message);
                 }
             } catch (err) {
@@ -79,6 +82,7 @@ const AuthScreen = () => {
         return status + message;
     }
 
+    
     return (
         //<ImageBackground source={require('../public/images/gradient-back.jpeg')} style={styles.image}>
             <View style={styles.card}>

@@ -33,10 +33,12 @@
     "react-native-my-sql-connection": "^1.0.4",
     "react-native-safe-area-context": "3.2.0",
     "react-native-web": "~0.13.12",
+    "request": "^2.88.2",
     "sequelize": "^6.7.0",
     "sequelize-cli": "^6.2.0",
     "styled-components": "^5.3.1",
-    "stylesheet": "^0.9.1"
+    "stylesheet": "^0.9.1",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

@@ -69,6 +69,7 @@ const AuthScreen = ({navigation}) => {
                     setMessage(jsonRes.message);
                 }
             } catch (err) {
+                // 여기로 바로 들어와짐 try 절이 아예 수행 안되는듯 뭐가 문제지 갑자기 ;
                 console.log(err);
             };
         })

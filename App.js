@@ -1,18 +1,12 @@
 import React, {useEffect} from 'react';
 import { Alert , StyleSheet, SafeAreaView} from 'react-native';
-import Weather from './src/screens/Weather';
-import WeatherLoading from './src/screens/WeatherLoading';
 import * as Location from 'expo-location';
 import axios from 'axios';
-import Signup from './src/Test/Signup'
-import Login from './src/Test/Login'
 import styled from 'styled-components/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Navigator from './Navigator';
-import Map from './src/Test/Map';
-import Loading from "./src/screens/Loading";
-import AuthScreen from "./src/screens/AuthScreen";
-import NavigatorScreen from './Navigator';
+import NavigatorScreen from './src/navigations/MenuNavigation';
+import Loading from './src/screens/Loading';
+import AuthScreen from './src/screens/AuthScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
 
@@ -88,8 +82,6 @@ export default class extends React.Component { //class로 바꾼모습
     //   <Map></Map>
     // )
 
-    
-  
   }
 };
 

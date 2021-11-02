@@ -1,10 +1,7 @@
 import React, {useState} from "react";
 import {BottomNavigation} from "react-native-paper";
-import Login from './src/Test/Login';
-import Signup from './src/Test/Signup';
-import Map from './src/Test/Map';
-import WeatherScreen from "./src/Test/WeatherScreen";
-import Home from "./src/screens/Weather"
+import Map from '../screens/Map';
+import Main from "../screens/WeatherSetting";
 
 export default function Navigator(){
     const [index, setIndex] = useState(0);
@@ -18,9 +15,9 @@ export default function Navigator(){
     const renderScene = BottomNavigation.SceneMap({
         // 여기 씬 있는데에 Test의 파일 넣으면 됨 Login, Signup 같은거 쓰면됨
         // 근데 Login, Signup넣으면 에러남
-        scene1: Signup,
-        scene2: WeatherScreen,
-        scene3: WeatherScreen,
+        scene1: Map,
+        scene2: Main,
+        scene3: Main,
         scene4: Map,
         scene5: Map,
 });

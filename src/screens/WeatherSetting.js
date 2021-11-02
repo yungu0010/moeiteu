@@ -4,13 +4,9 @@ import Weather from './Weather';
 import WeatherLoading from './WeatherLoading';
 import * as Location from 'expo-location';
 import axios from 'axios';
-//import Signup from './src/Test/Signup'
-//import Login from './src/Test/Login'
-//import styled from 'styled-components/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { AuthScreen } from './src/screens';
 
 const API_KEY ="0378f839f05bd16fb2624b36317a1672";
 

@@ -4,11 +4,14 @@ const auth = require('./auth');
 const login = auth.login;
 const signup = auth.signup;
 const isAuth = auth.isAuth;
+const getMountain = auth.getMountain;
 
 const router = express.Router();
 
 router.post('/login', login);
 router.post('/signup', signup);
+
+router.get('/main',getMountain);
 
 router.get('/private', isAuth);
 router.get('/public', (req, res, next) => {

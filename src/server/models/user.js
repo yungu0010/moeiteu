@@ -13,7 +13,7 @@ module.exports = class User extends Sequelize.Model {
             allowNull: false,
         },
         password: {
-            type: Sequelize.STRING(20),
+            type: Sequelize.STRING(100),
             allowNull: false,
         },
         // ID를 메일로 할거야? 아님 메일도 받고 아이디도 받을거야?
@@ -68,4 +68,3 @@ module.exports = class User extends Sequelize.Model {
     });
   }
 };
-

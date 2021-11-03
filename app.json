@@ -20,6 +20,10 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.friclimb.moeiteu", 
+      "config": { 
+        "googleMaps": { "apiKey": "AIzaSyAgpHZuCjgj0lc59lghkBYg5AS-AXCbIgA" } 
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

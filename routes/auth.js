@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../src/server/models/user');
 const Mountain = require('../src/server/models/mountain');
-const { Sequelize } = require('sequelize/types');
+// const { Sequelize } = require('sequelize/types');
 
 const signup = (req, res, next) => {
    
@@ -20,7 +20,6 @@ const signup = (req, res, next) => {
                 if (err) {
                     return res.status(500).json({message: "couldnt hash the password"}); 
                 } else if (passwordHash) {
-
                     // DB User 모델에 사용자 추가
                     return User.create(({
                         user_img: "img",

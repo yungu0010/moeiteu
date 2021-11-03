@@ -59,6 +59,8 @@ const AuthScreen = ({navigation}) => {
         })
         .then(async res => { 
             try {
+                // const text=await res.text()
+                // console.log(text)
                 const jsonRes = await res.json();
                 if (res.status !== 200) {
                     setIsError(true);

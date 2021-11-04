@@ -5,15 +5,14 @@ import { search } from '../../routes/user';
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2.2:8080'; 
+// 로그인 후 내 메일 받아오는법 const mymail = ~~~
 
-
-const Map = () => {
-    
+const Follow = () => {
 
     const [searchFlag, setSearchFlag] = useState(false); // 검색 버튼 눌렀는지 여부
-    const [searchemail, setSearchEmail] = useState('');
+    const [searchemail, setSearchEmail] = useState('');  // 검색시 입력하는 이메일
     const [followFlag, setFollowFlag] = useState(true);  // 팔로우중인지 언팔로우 중인지 여부
-    const [findemail, setFindEmail] = useState('');
+    const [findemail, setFindEmail] = useState('');      // 결과로 받은 이메일 (search랑 find 이멜 같을것)
 
     const searchFriend = () => {
 
@@ -48,11 +47,8 @@ const Map = () => {
 
     }
 
-    const following = ()=> {
-        // 팔로우 하는 알고리즘 -> 내이메일 또는 아이디와 친구이메일 보냄
-        console.log("follow")
-        
-        // 친구메일과 내 ID
+    const following = ()=> {        
+        // 친구메일과 내 메일 (귀찮으면 다른데서 찾아서 주거나 로그인 시 id 줘서 그걸로 다 뿌리고 다니게)
         const inform = {searchemail, mymail}
 
         fetch(`${API_URL}/friend/follow`, {
@@ -65,7 +61,7 @@ const Map = () => {
         .then(async res => { 
             try {
                 const jsonRes = await res.json();
-                if (res.status == 200) {
+                if (res.status == 200) {  // 팔로우 했으므로 followFlag true
                    setFollowFlag(true)
                 } 
             } catch (err) {
@@ -79,8 +75,6 @@ const Map = () => {
 
     
     const unfollowing = ()=> {
-        console.log("unfollow")
-
         const inform = {searchemail, mymail}
 
         fetch(`${API_URL}/friend/unfollow`, {
@@ -93,7 +87,7 @@ const Map = () => {
         .then(async res => { 
             try {
                 const jsonRes = await res.json();
-                if (res.status == 200) {
+                if (res.status == 200) {   // 언팔로우 했으므로 followFlag false
                    setFollowFlag(false)
                 } 
             } catch (err) {
@@ -176,4 +170,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Map;
+export default Follow;

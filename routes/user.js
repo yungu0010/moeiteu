@@ -37,7 +37,7 @@ const follow = (req,res,next) => {
             return res.status(404).json({message: "user not found"});
         } else {
             // 찾는 친구 메일이 있다면 email과 follower 여부 관계 보냄
-            await dbUser.addFollowing(parseInt(dbUser.isSoftDeleted, 10));
+            await dbUser.addFollowing(parseInt(myId, 10));
             res.status(200).json({message:success});
         }
     })

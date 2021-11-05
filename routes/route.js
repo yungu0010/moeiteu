@@ -16,9 +16,9 @@ const router = express.Router();
 router.post('/login', login);
 router.post('/signup', signup);
 
-router.post('/friend/follow', follow);
-router.post('/friend/unfollow', unfollow);
-router.post('/friend/search', search);
+router.post('/follow', follow);
+router.post('/unfollow', unfollow);
+router.post('/search', search);
 
 router.get('/main',getMountain);
 

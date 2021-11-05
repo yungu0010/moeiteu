@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput} from 'react-native';
-import { search } from '../../routes/user';
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height

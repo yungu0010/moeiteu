@@ -1,11 +1,8 @@
 const User = require('../src/server/models/user');
-let myId;
+let mine;
 
 const search = (req,res,next)=>{
-
-    User.findOne({where: {email: req.body.mymail}})
-    .then(user=>{myId=user.id})
-
+    mine= req.body.myId
     User.findOne({where: {email: req.body.searchemail}}) //Follow에서 바디에 friend 객체
     .then(dbUser => {
         if (!dbUser) {
@@ -14,8 +11,8 @@ const search = (req,res,next)=>{
         } else {
             // 찾는 친구 메일이 있다면 email과 follower 여부 관계 보냄
 
-            let flag = true;
-            // 팔로우 상태인지 아닌지 판단하는 코드
+            // !!! 추가 : 팔로우 상태인지 아닌지 판단하는 코드 (일단 임의로 둠) > 모델 User 가서 뒤적거려야 할거같아
+            let flag = false; 
 
             res.status(200).json({"email": dbUser.email, "follow": flag});
 
@@ -26,10 +23,7 @@ const search = (req,res,next)=>{
 }
 
 const follow = (req,res,next) => {
-
-    User.findOne({where: {email: req.body.mymail}})
-    .then(user=>{myId=user.id})
-
+    mine= req.body.myId
     User.findOne({where: {email: req.body.searchemail}}) 
     .then( async(dbUser) => {
         if (!dbUser) {
@@ -37,17 +31,14 @@ const follow = (req,res,next) => {
             return res.status(404).json({message: "user not found"});
         } else {
             // 찾는 친구 메일이 있다면 email과 follower 여부 관계 보냄
-            await dbUser.addFollowing(parseInt(myId, 10));
-            res.status(200).json({message:success});
+            await dbUser.addFollowing(parseInt(mine, 10));
+            res.status(200).json({message:"success"});
         }
     })
 }
 
 const unfollow =(req, res, next) => {
-
-    User.findOne({where: {email: req.body.mymail}})
-    .then(user=>{myId=user.id})
-
+    mine= req.body.myId // 내 아이디
     User.findOne({where: {email: req.body.searchemail}}) 
     .then(async(dbUser) => {
         if (!dbUser) {
@@ -55,8 +46,8 @@ const unfollow =(req, res, next) => {
             return res.status(404).json({message: "user not found"});
         } else {
             // 찾는 친구 메일이 있다면 email과 follower 여부 관계 보냄
-            await dbUser.removeFollowing(parseInt(myId, 10));
-            res.status(200).json({message:success});
+            await dbUser.removeFollowing(parseInt(mine, 10));
+            res.status(200).json({message:"success"});
         }
     })
 }

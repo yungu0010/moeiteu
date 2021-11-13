@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import {BottomNavigation} from "react-native-paper";
 import Map from '../screens/Map';
 import Main from "../screens/WeatherSetting";
-import Follow from "../screens/Follow"
+import Follow from "../screens/Follow";
+import Mypage from "../screens/Mypage";
 
 export default function Navigator(){
     const [index, setIndex] = useState(0);
@@ -17,7 +18,7 @@ export default function Navigator(){
         // 여기 씬 있는데에 Test의 파일 넣으면 됨 Login, Signup 같은거 쓰면됨
         // 근데 Login, Signup넣으면 에러남
         scene1: Map,
-        scene2: Main,
+        scene2: Mypage,
         scene3: Main,
         scene4: Map,
         scene5: Follow,

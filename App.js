@@ -9,6 +9,7 @@ import Loading from './src/screens/Loading';
 import AuthScreen from './src/screens/AuthScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
+import Mypage from './src/screens/Mypage';
 
 const Stack = createStackNavigator();
 
@@ -63,13 +64,13 @@ export default class extends React.Component { //class로 바꾼모습
     }else{
       return (
         <SafeAreaView style={styles.safeAreaView}>
-    
-          <NavigationContainer>
+          <Mypage></Mypage>
+          {/* <NavigationContainer>
             <Stack.Navigator initialRouteName="Auth">
               <Stack.Screen name="Auth" component={AuthScreen} />
               <Stack.Screen name="Main" component={NavigatorScreen}  options={{headerShown: false}}/>
             </Stack.Navigator>
-          </NavigationContainer>
+          </NavigationContainer> */}
           
         </SafeAreaView>)
     }

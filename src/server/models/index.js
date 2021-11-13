@@ -4,6 +4,7 @@ const Mountain = require('./mountain');
 const Post = require('./post');
 const Rating = require('./rating');
 const Record = require('./record');
+const Follow = require('./follow')
 
 const dbConfig = require("../config/db.config");
 
@@ -17,19 +18,22 @@ db.User = User;
 db.Mountain = Mountain;
 db.Post = Post;
 db.Rating = Rating;
-db.Record= Record;
+db.Record = Record;
+db.Follow = Follow;
 
 User.init(sequelize);
 Mountain.init(sequelize);
 Post.init(sequelize);
 Rating.init(sequelize);
 Record.init(sequelize);
+Follow.init(sequelize);
 
 User.associate(db);
 Mountain.associate(db);
 Post.associate(db);
 Rating.associate(db);
 Record.associate(db);
+Follow.associate(db);
 
 module.exports = db;
 

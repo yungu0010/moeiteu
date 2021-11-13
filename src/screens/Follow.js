@@ -20,8 +20,6 @@ const Follow = () => {
 
     // !!!! 추가 : 자신의 계정일 경우 검색 불가.
     const searchFriend = () => {
-
-        console.log("!!")
         setSearchFlag(true);
         const inform = {searchemail, myId}
         // 보낸 응답에 대한 라우터 처리를 then 으로 기다림

@@ -1,6 +1,6 @@
 module.exports = {
     user: "root",
-    password: "",
+    password: "0000",
     database: "moeiteu", // 존재하는 DB 쓸것
     host: "localhost",
     dialect: "mysql",

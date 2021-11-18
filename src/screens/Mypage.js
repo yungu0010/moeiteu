@@ -1,19 +1,51 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
 import {  Title, Caption, Text, TouchableRipple} from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { response } from 'express';
+
+const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2.2:8080'; 
 
 
 const Mypage = () => {
 
     // 뱃지탭 다른거 보여줄 때 쓸 예정
     const [badgeTab, setBadgeTab] = useState(1);
+
+    const[badges,setBadges]=useState();//결과로 받은 뱃지들
+
+    const userID=1 //suhwa@gmail.com/suhwa/suhwa1234 계정의 아이디로 일단 박아둠
   
     const onSelectSwitch = value => {
       setBadgeTab(value);
     };
   
+    const takeBadges=()=>{
+
+      console.log("이벤트 클릭\n");
+
+      fetch(`${API_URL}/${userID}/badges`,
+      {
+        method : 'GET',
+        headers : {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(async (res)=>{
+        console.log("res옴??");
+        const jsonRes = await res.json();
+        if(res.status==200){
+          console.log(jsonRes.messaage);
+        }
+        else if(res.status==404){
+          console.log(jsonRes.ratingArray);
+        }
+        
+
+      }).catch();
+      
+    };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -63,6 +95,12 @@ const Mypage = () => {
           <View style={styles.menuItem}>
             <Icon name="human-greeting" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>내가 팔로우 하는 사람</Text>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={takeBadges}>
+          <View style={styles.menuItem}>
+            <Icon name="human-greeting" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>내가 가지고 있는 뱃지들</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => {}}>

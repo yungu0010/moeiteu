@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cb339242-cf43-45f9-9db7-1dbcba913731" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigations/AuthNavigation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigations/MenuNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigations/MenuNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigations/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/AuthScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AuthScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Signup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Weather.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Weather.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/WeatherLoading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/WeatherLoading.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/WeatherSetting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/WeatherSetting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/config/db.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/config/db.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/models/mountain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/mountain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/server.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="215QYtV0caUkQelzZhsE1C22RBR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cb339242-cf43-45f9-9db7-1dbcba913731" name="Default Changelist" comment="" />
+      <created>1637228536894</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1637228536894</updated>
+    </task>
+    <servers />
+  </component>
+</project>

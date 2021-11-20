@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {BottomNavigation} from "react-native-paper";
 import Map from '../screens/Map';
 import Main from "../screens/WeatherSetting";
+import Follow from "../screens/Follow"
 
 export default function Navigator(){
     const [index, setIndex] = useState(0);
@@ -19,7 +20,7 @@ export default function Navigator(){
         scene2: Main,
         scene3: Main,
         scene4: Map,
-        scene5: Map,
+        scene5: Follow,
 });
     return <BottomNavigation navigationState={{index, routes}}
 onIndexChange={setIndex} renderScene={renderScene}/>;

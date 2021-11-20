@@ -18,8 +18,9 @@ const weatherSetting = () => {
   
   const [state, setState] = useState({ isLoading:true})
   const [altitude, setAltitude] = useState(0)
-  const [mAltitude, setmAltitude ] =useState(0)
-  const [isComplete, setIsComplete ] = useState(false)
+  const [mAltitude, setmAltitude] =useState(0)
+  const [isComplete, setIsComplete] = useState(false)
+  const [ratingOn, setRatingOn] = useState(false)
 
   // 산을 선택했을경우 그 산에 대한 고도 라우터에 요청해서 가져오기 => setmAltitude로 산 고도 지정해주기 mountaingId도 주기
 
@@ -33,6 +34,7 @@ const weatherSetting = () => {
       
       setIsComplete(true);
       setAltitude(mAltitude);
+      setRatingOn(true);    // 평가 가능하도록하기
 
       const inform = {myId:myId, mountainId:mountainId, altitude:altitude};
       fetch(`${API_URL}/badge`, {

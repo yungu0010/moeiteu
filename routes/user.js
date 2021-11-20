@@ -70,6 +70,7 @@ const badge = async(req, res, next) => {
         mountain_id = req.body.mountainId
     }))
     .then(() => {
+        res.status(200).json({message: "record created"});
         console.log("Record completed")
     })
     .catch(err => {
@@ -78,13 +79,13 @@ const badge = async(req, res, next) => {
     
     // 근데 만들어진 rating 테이블 보면 userId랑 user_id 둘다 있는데 왠지 모르겠음;;;  UserId인거 보면 시퀄라이즈에서 자동으로 생성한 것 같은데 왠지 흠;;
     // 그리고 관계테이블에 넣을때 create한후에 키?? 각각 테이블에 관계로 넣은 애들도 저렇게 적어도 되는건지 모르겠도;; 일단 써봤는데 테스트를 못해서 어떤지 모르겠듬
-    const result= await Rating.findOne({where: {user_id: req.body.myId, mountain_id:req.body.mountainId}})
-    if (result == null){ // record에 기록이 없다면 기록하기 즉 뱃지 받은거임 평가는 기본값 있길래 안줌
-        Rating.create(({
-            user_id: req.body.myId,
-            mountain_id: req.body.mountainId
-        }))
-    }
+    // const result= await Rating.findOne({where: {user_id: req.body.myId, mountain_id:req.body.mountainId}})
+    // if (result == null){ // record에 기록이 없다면 기록하기 즉 뱃지 받은거임 평가는 기본값 있길래 안줌
+    //     Rating.create(({
+    //         user_id: req.body.myId,
+    //         mountain_id: req.body.mountainId
+    //     }))
+    // }
 
 }
 

@@ -3,21 +3,32 @@ const Sequelize = require('sequelize');
 module.exports = class Rating extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-        //1~5점이니까 제약사항 걸었으면 좋겠는뎅 
-        r_f:{ 
-            type: Sequelize.INTEGER,
+        r_f:{               // facility
+            type: Sequelize.FLOAT,
             allowNull:false,
             defaultValue: 5,
+            validate: {
+              min: 0.5,     // only allow values >= 0.5
+              max: 5,       // only allow values <= 5
+            },
         },
-        r_s:{
-            type: Sequelize.INTEGER,
+        r_s:{               // scene
+            type: Sequelize.FLOAT,
             allowNull:false,
             defaultValue: 5,
+            validate: {
+              min: 0.5,     // only allow values >= 0.5
+              max: 5,       // only allow values <= 5
+            },
         },
-        r_d:{
-            type: Sequelize.INTEGER,
+        r_d:{               // difficulty
+            type: Sequelize.FLOAT,
             allowNull:false,
             defaultValue: 5,
+            validate: {
+              min: 0.5,     // only allow values >= 0.5
+              max: 5,       // only allow values <= 5
+            },
         },
     }, {
       sequelize,

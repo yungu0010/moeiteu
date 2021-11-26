@@ -1,3 +1,75 @@
+import React, { useState } from 'react';
+import { render } from 'react-dom';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+
+const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2.2:8080'; 
+
+
+const Mypage = () => {
+    const[badges,setBadges]=useState();//결과로 받은 뱃지들
+
+    const userID=1 //suhwa@gmail.com/suhwa/suhwa1234 계정의 아이디로 일단 박아둠
+  
+    const takeBadges=()=>{
+
+      console.log("이벤트 클릭\n");
+
+      fetch(`${API_URL}/${userID}/badges`,
+      {
+        method : 'GET',
+        headers : {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(async (res)=>{
+        console.log("res옴??");
+        const jsonRes = await res.json();
+        if(res.status==200){
+          console.log(jsonRes.messaage);
+        }
+        else if(res.status==404){
+          console.log('404');
+        }
+        
+
+      }).catch();
+      
+    };
+
+  return (
+
+      <View onPress={takeBadges}>    
+            
+                
+        <TouchableOpacity style={styles.button} onPress={takeBadges}>
+          
+            <Text >내가 가지고 있는 뱃지들</Text>
+          
+        </TouchableOpacity>
+    
+      </View>
+  );
+};
+const styles = StyleSheet.create({
+    
+    button: {
+        width: '80%',
+        backgroundColor: 'skyblue',
+        height: 40,
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 5,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '400'
+    }
+});
+
+export default Mypage;
+
 
 //왜 이파일만 추가하면 오류가 나는걸까?
 /*import React,{useState} from 'react';

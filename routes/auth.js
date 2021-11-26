@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-
+//const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../src/server/models/user');
 const Mountain = require('../src/server/models/mountain');
@@ -16,7 +16,7 @@ const signup = (req, res, next) => {
             return res.status(409).json({message: "email already exists"});
         } else if (req.body.email && req.body.password) {
             // password hash
-            bcrypt.hash(req.body.password, 12, (err, passwordHash) => {
+            bcryptjs.hash(req.body.password, 12, (err, passwordHash) => {
                 if (err) {
                     return res.status(500).json({message: "couldnt hash the password"}); 
                 } else if (passwordHash) {
@@ -60,7 +60,7 @@ const login = (req, res, next) => {
             return res.status(404).json({message: "user not found"});
         } else {
             // password hash
-            bcrypt.compare(req.body.password, dbUser.password, (err, compareRes) => {
+            bcryptjs.compare(req.body.password, dbUser.password, (err, compareRes) => {
                 if (err) { 
                     res.status(502).json({message: "error while checking user password"});
                 } else if (compareRes) { // 비밀번호 일치할때

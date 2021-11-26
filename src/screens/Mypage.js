@@ -1,4 +1,6 @@
-import React,{useState} from 'react';
+
+//왜 이파일만 추가하면 오류가 나는걸까?
+/*import React,{useState} from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
 import {  Title, Caption, Text, TouchableRipple} from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -166,3 +168,4 @@ const styles = StyleSheet.create({
     lineHeight: 26,
   },
 });
+*/

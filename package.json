@@ -39,8 +39,8 @@
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.4",
-    "sequelize": "^6.7.0",
-    "sequelize-cli": "^6.2.0",
+    "sequelize": "^6.11.0",
+    "sequelize-cli": "^6.3.0",
     "styled-components": "^5.3.1",
     "stylesheet": "^0.9.1"
   },

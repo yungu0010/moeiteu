@@ -9,14 +9,11 @@ const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2
 const Mypage = () => {
     const[badges,setBadges]=useState([{moutain_id : 0, r_d : 0, r_f : 0, r_s : 0}]);//결과로 받은 뱃지들
     const[isgetbadge,setisget]=useState(false);
-
-    const userID=1 //suhwa@gmail.com/suhwa/suhwa1234 계정의 아이디로 일단 박아둠
+    const userID=1; //suhwa@gmail.com/suhwa/suhwa1234 계정의 아이디로 일단 박아둠
   
     const takeBadges=()=>{
-        setBadges([...badges, {moutain_id : 1, r_d : 1, r_f : 1, r_s : 1} ]);
-        setisget(true);
-
-     /* console.log("이벤트 클릭\n");
+       
+      console.log("이벤트 클릭\n");
 
       fetch(`${API_URL}/${userID}/badges`,
       {
@@ -28,7 +25,10 @@ const Mypage = () => {
       .then(async (res)=>{
         const jsonRes = await res.json();
         if(res.status==200){
-          console.log(jsonRes);
+          //console.log(jsonRes);
+          res=jsonRes[0];
+          console.log(res);
+          console.log(res.UserID); //read-only라고 하네... 그럼 뭐 어쩌란건지
           setisget(true);
           //const Res=JSON.parse(jsonRes);
           console.log(jsonRes.length);
@@ -45,19 +45,24 @@ const Mypage = () => {
       }).catch(e => {
           console.log(e);
       });
-      */
+      
     };
 
   return (
+      
       isgetbadge ? 
-      <View>   
-        <TouchableOpacity style={styles.button2} onPress={takeBadges}>
-            <Text >내가 가지고 있는 뱃지들</Text>        
-        </TouchableOpacity>
-        {badges.map(bd=>{
-            <Text>{bd.moutain_id}</Text>
-        })}
-      </View>
+      <View>    
+      <TouchableOpacity style={styles.button2} onPress={takeBadges}>
+      <Text >내가 가지고 있는 뱃지들</Text> 
+      </TouchableOpacity>
+      {/*<Text>디비에서 받아온 뱃지들 : {Res}</Text>
+      
+      {badges.map(bd=>{
+            <Text>
+                
+                산이름 : {bd.moutain_id}</Text>
+        })} */}   
+    </View>
       :
       <View>    
         <TouchableOpacity style={styles.button1} onPress={takeBadges}>

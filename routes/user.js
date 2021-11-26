@@ -1,5 +1,7 @@
 const User = require('../src/server/models/user');
-const Follow = require('../src/server/models/follow')
+const Follow = require('../src/server/models/follow');
+const Rating=require('../src/server/models/rating');
+
 let mine;
 
 const search = (req,res,next)=>{
@@ -57,4 +59,22 @@ const unfollow =(req, res, next) => {
     })
 }
 
-module.exports = {search,follow, unfollow};
+const getBadge=(req,res,next)=>{
+    mine=1;
+    Rating.findAll({where: {UserId : mine}})
+    .then(async(dbBadge)=>{
+        if(dbBadge.length==0){
+            return res.status(404).json({message: "you have no badges"});
+        }else{
+            res.status(200).json(dbBadge);
+            //dbBadge.map( badge =>{
+              //  res.status(200).json({"mountain": badge.mountain_id, "user": UserId});
+            //});
+            
+        }
+        return res.end();
+    })
+
+}
+
+module.exports = {search,follow, unfollow, getBadge};

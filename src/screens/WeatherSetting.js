@@ -9,6 +9,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 const API_KEY ="0378f839f05bd16fb2624b36317a1672";
+const REST_API_KEY="605e4dd1010ecfb814b381ebf6fab6d8";
 
 export default class extends React.Component { //class로 바꾼모습
   
@@ -38,7 +39,11 @@ export default class extends React.Component { //class로 바꾼모습
   getLocation = async()=>{
     try {
       await Location.requestForegroundPermissionsAsync();
-      const {coords: {latitude, longitude, altitude}} = await Location.getCurrentPositionAsync();
+      const {coords: {latitude, longitude, altitude}} = await Location.getCurrentPositionAsync(); //현재 위도,경도,고도 받아오기
+      const { kakaodata } =await axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${longitude}&y=${latitude}`,
+      {headers : { Authorization : `KakaoAK ${REST_API_KEY}`}});
+      console.log(`address_name : ${kakaodata[0].address.address_name}`);                          
+      this.getMountain();
       this.getWeather(latitude, longitude);
       // 나중에 필요할수 있을것 같으니 변수에 lat, long, alt 저장하는 코드 추가하면 될듯
     } catch (error) {
@@ -52,17 +57,13 @@ export default class extends React.Component { //class로 바꾼모습
   }
 
   render(){
-    const { isLoading, temp, condition } = this.state;
+    const { isLoading, temp, condition, mountain } = this.state;
     return isLoading ? <WeatherLoading /> : 
-    (
-      <Weather temp={Math.round(temp)} condition={condition} />
+    (<> <Weather temp={Math.round(temp)} condition={condition} />
+    <Text>현재산 : {mountain}</Text></>
+     
     ); 
-    // return(
-    //   <SafeAreaProvider style={{marginTop:50}}>
-    //     <AuthScreen></AuthScreen>
-    //     <StatusBar style="auto"></StatusBar>
-    //   </SafeAreaProvider>
-    // )
+   
   }
 
 };

@@ -4,14 +4,15 @@ const Record = require('../src/server/models/record');
 const Rating = require('../src/server/models/rating');
 let mine;
 
+// mine에 있는 변수들 쿠키 혹은 res.local이면 다 바뀌어야함
+
+// 친구 찾는 기능
+// 등록한 메일로 친구가 있는지 찾고 친구가 있으면서 내아이디와 다르면 친구아이디와 팔로우 여부 보냄
 const search = (req,res,next)=>{
     mine= req.body.myId
-    User.findOne({where: {email: req.body.searchemail}}) //Follow에서 바디에 friend 객체
+    User.findOne({where: {email: req.body.searchemail}})
     .then((dbUser) => {
-        if (!dbUser) {
-            // 찾는 친구 메일이 없다면
-            return res.status(404).json({message: "user not found"});
-        } else {
+        if (dbUser && dbUser.id != mine) {
             // 찾는 친구 메일이 있다면 email과 follower 여부 관계 보냄
             const friendId=dbUser.id
             Follow.findOne({where:{followerId:friendId, followingId:mine} })
@@ -25,6 +26,9 @@ const search = (req,res,next)=>{
                 }
             })
             console.log("find friends success")
+        } else {
+            // 찾는 친구 메일이 없거나 내 메일일 경우
+            return res.status(404).json({message: "user not found"});
         }
     })
 }
@@ -62,12 +66,11 @@ const unfollow =(req, res, next) => {
 const badge = async(req, res, next) => {
     // 사람 - 산 사이 연관테이블에 기록 생성
     // 근데 record는 등산할때마다 기록해줘야함
-    // 
- 
+    
     Record.create(({
         temp_altitude: req.body.altitude,
-        user_id = req.body.myId,
-        mountain_id = req.body.mountainId
+        user_id: req.myId,
+        mountain_id: req.body.mountainId
     }))
     .then(() => {
         res.status(200).json({message: "record created"});

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import {View, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
-import react from 'react';
 import * as Location from 'expo-location';
 import { long } from 'webidl-conversions';
 
@@ -16,18 +15,17 @@ let Nlatitude, Nlongtitude
 
 const Map = () => {
 
-
-    // 사실 초기값은 읽어온 위도 경도 넣어야 할 것. weathersetting.js에서 읽어온걸..? 넣도록.
-    // 근데 사실 onRegionChange 때문에 안해도 될 것 같긴함
+    // 사실 초기값은 읽어온 위도 경도 넣어야 할 것. weathersetting.js에서 읽어온걸..? 넣도록
     // 사용자 위치추적도 가능함 하고싶다면 사용할 것.
     const [location, setLocation]=useState({
-        latitude: 37.5642135, // Nlatitude로 바꿀것
+        latitude: 37.5642135, 
         longitude: 127.0016985,
         latitudeDelta: 0.1, // 얘네 늘이면 지도 확대율 지정됨
         longitudeDelta: 0.1,
     })
 
-    console.log(location)
+    // onRegionChange위치 변경시 발생이벤트인데 성능저하 우려시 throttle 사용
+    // 변경 완료시 발생하는 이벤트는 onRegionChangeComplete임
     return (
         <View style={styles.container}>
             <MapView

@@ -43,14 +43,17 @@ export default class extends React.Component { //class로 바꾼모습
   getLocation = async()=>{
     try {
       await Location.requestForegroundPermissionsAsync();
-      const {coords: {latitude, longitude, altitude}} = await Location.getCurrentPositionAsync(); //현재 위도,경도,고도 받아오기
+
+      
+      const {coords: {latitude, longitude, altitude}} = await Location.getCurrentPositionAsync({accuracy : Location.Accuracy.Highest}); //현재 위도,경도,고도 받아오기
       console.log(`엑스포에서 받은 위도 : ${latitude}, 경도 : ${longitude}, 고도 : ${altitude}`);
+
 
 
       
 //임의로 좌표를 바꾸고서야 알았다... 좌표문제구나!! api는 잘 작동하던 거였음 ㅠㅜ
-      const lat=37.54553717940867//Math.abs(latitude);
-      const lon=126.96388850341363//Math.abs(longitude);
+      const lat=Math.abs(latitude);
+      const lon=Math.abs(longitude);
       console.log(`임의로 지정한 위도 : ${lat}, 경도 : ${lon}`);
 
       //카카오는 안되늰것같은데 왜 안되지? 구글이랑 네이버로 시도해보고싶은데 구글이랑 네이버는 결제카드등록해야함 

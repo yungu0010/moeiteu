@@ -9,8 +9,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-const API_KEY ="0378f839f05bd16fb2624b36317a1672";
-const REST_API_KEY="605e4dd1010ecfb814b381ebf6fab6d8";
+const API_KEY ="0378f839f05bd16fb2624b36317a1672";//날씨
+const REST_API_KEY="605e4dd1010ecfb814b381ebf6fab6d8"; //카카오
+const X_NCP_APIGW_API_KEY_ID="b4ctzbcazx";
+const X_NCP_APIGW_API_KEY="SJ53Y5R3eN2OCO7ZVI6gTI96jOZjBQYSxrXoHLeT";
 
 export default class extends React.Component { //class로 바꾼모습
   
@@ -42,14 +44,41 @@ export default class extends React.Component { //class로 바꾼모습
     try {
       await Location.requestForegroundPermissionsAsync();
       const {coords: {latitude, longitude, altitude}} = await Location.getCurrentPositionAsync(); //현재 위도,경도,고도 받아오기
-      console.log(`위도 : ${latitude}, 경도 : ${longitude}, 고도 : ${altitude}`);
-    
+      console.log(`엑스포에서 받은 위도 : ${latitude}, 경도 : ${longitude}, 고도 : ${altitude}`);
 
 
-
+      
+//임의로 좌표를 바꾸고서야 알았다... 좌표문제구나!! api는 잘 작동하던 거였음 ㅠㅜ
+      const lat=37.54553717940867//Math.abs(latitude);
+      const lon=126.96388850341363//Math.abs(longitude);
+      console.log(`임의로 지정한 위도 : ${lat}, 경도 : ${lon}`);
 
       //카카오는 안되늰것같은데 왜 안되지? 구글이랑 네이버로 시도해보고싶은데 구글이랑 네이버는 결제카드등록해야함 
       
+//네이버
+      fetch(`https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=${lon},${lat}&orders=addr&output=json`, {
+        method: 'GET',
+        headers : {
+          'X-NCP-APIGW-API-KEY-ID' : X_NCP_APIGW_API_KEY_ID,
+          'X-NCP-APIGW-API-KEY' : X_NCP_APIGW_API_KEY,
+          'Content-Type': 'application/json',
+          'charset':'UTF-8'
+          
+        }
+    })
+    .then(async (response)=>{
+      console.log("anser naver");
+      //const items =JSON.parse(response.json);
+      //const items =JSON.parse(JSON.stringify(response.body));
+      const items = await response.json();
+
+      console.log("res naver");
+      console.log(items);
+      console.log(items.body);
+      
+      //console.log(items._bodyInit._data);
+      //const iteminit=_bodyInit._data;
+    });
       /*
       const { kakaodata:{
         documents : {
@@ -64,7 +93,8 @@ export default class extends React.Component { //class로 바꾼모습
     console.log(`kakao`);
     console.log(kakaodata.documents.address);
       */
-      fetch(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${longitude}&y=${latitude}`, {
+     
+      fetch(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lon}&y=${lat}`, {
         method: 'GET',
         headers : {
           'Authorization' : `KakaoAK ${REST_API_KEY}`,
@@ -73,13 +103,13 @@ export default class extends React.Component { //class로 바꾼모습
           
         }
     })
-    .then((response)=>{
-      console.log("anser");
+    .then(async(response)=>{
+      console.log("anser kakao");
       //const items =JSON.parse(response.json);
       //const items =JSON.parse(JSON.stringify(response));
-      const items =response.json;
+      const items = await response.json();
 
-      console.log("res");
+      console.log("res kakao");
       console.log(items);
       
       //console.log(items._bodyInit._data);

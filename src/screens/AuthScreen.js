@@ -59,8 +59,6 @@ const AuthScreen = ({navigation}) => {
         })
         .then(async res => { 
             try {
-                // const text=await res.text()
-                // console.log(text)
                 const jsonRes = await res.json();
                 if (res.status !== 200) {
                     setIsError(true);
@@ -71,7 +69,6 @@ const AuthScreen = ({navigation}) => {
                     setMessage(jsonRes.message);
                 }
             } catch (err) {
-                // 여기로 바로 들어와짐 try 절이 아예 수행 안되는듯 뭐가 문제지 갑자기 ;
                 console.log(err);
             };
         })

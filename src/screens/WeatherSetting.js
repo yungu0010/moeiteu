@@ -27,8 +27,8 @@ const weatherSetting = () => {
   // 고도가 변할때마다 등산을 완료했는지 확인하는 코드
   // getLocation을 매번 해준다고 하면 그때마다 altitude가 변경되므로 그때마다 현재 고도와 산의 고도를 비교하는 코드 
   // 현재고도가 같거나 더 높다면 iscomplete를 true로 바꿔주고 요청을 보냄
-  // badge 라우터에선 record 테이블에도 기록찍고 rating테이블에도 만들어줌 => 우리 산-유저 관계테이블이 rating과 record 두개던뎅
-  // record 테이블은 등산 완료하기 할때마다 기록 추가해주는것이었지...? 아마
+  // badge 라우터에선 record 테이블에도 기록찍고 record 테이블은 등산 완료하기 할때마다 기록 (등산 종료시 종료버튼 있어야 최종고도 판단하고 종료할때 편할듯)
+
   useEffect(()=>{
     if(altitude>=mAltitude){
       
@@ -64,6 +64,7 @@ const weatherSetting = () => {
 
 
   const getWeather = async(latitude, longitude) => {
+    console.log("!!")
     const {
       data: {
         main: { temp },
@@ -83,9 +84,12 @@ const weatherSetting = () => {
   const getLocation = async()=>{
     try {
       await Location.requestForegroundPermissionsAsync();
+      console.log("1")
       const {coords: {latitude, longitude, altitude}} = await Location.getCurrentPositionAsync();
+      console.log(latitude, longitude, altitude)
+      console.log("2")
       setAltitude(altitude) // 고도저장
-      console.log("4")
+      console.log("3")
       getWeather(latitude, longitude);
      
     } catch (error) {

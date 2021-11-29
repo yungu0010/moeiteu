@@ -22,7 +22,7 @@ router.post('/unfollow', unfollow);
 router.post('/search', search);
 router.get('/1/badges',badge);
 
-router.get('/main',getMountain);
+router.post('/main',getMountain);
 
 router.get('/private', isAuth);
 router.get('/public', (req, res, next) => {

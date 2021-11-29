@@ -1,3 +1,6 @@
+
+const Sequelize = require('sequelize');
+const Op=Sequelize.Op;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../src/server/models/user');
@@ -97,24 +100,26 @@ const isAuth = (req, res, next) => {
 
 const getMountain=(req,res,next)=>{
     
-    Mountain.findAll({
+    Mountain.findAndCountAll({
         where: {
-            location : { [Op.like]: `%${req.dongOrmyun}%`}
+            location : { [Op.like]: `%${req.body.dongORmyun}%`}
         }}
     )
-    .then(Mountain=>{
-        if(Mountain){ 
-            return res.status(200).json(Mountain);
+    .then(M=>{
+        
+        if(M.count>0){ 
+            return res.status(200).json(M.rows);
         }
         else{//현재위치의 동or면or읍 단위에 해당하는 산이 없다.
-            Mountain.findAll({
+            Mountain.findAndCountAll({
                 where: {
-                    location : { [Op.like]: `%${req.cityORgu}%`}
+                    location : { [Op.like]: `%${req.body.cityORgu}%`}
                 }}
             )
-            .then(Mountain=>{
-                if(Mountain){
-                    return res.status(200).json(Mountain);
+            .then(M=>{
+                
+                if(M.count>0){
+                    return res.status(200).json(M.rows);
                 }
                 else{//현재위치의 시or구에 해당하는 산이 없다.
                     return res.status(404).json({message : "이 주변에는 산이 없습니다."});

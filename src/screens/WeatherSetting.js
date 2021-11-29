@@ -22,7 +22,17 @@ export default class extends React.Component { //class로 바꾼모습
  
   
   state={
-    isLoading:true
+    isLoading:true,
+    
+    condition: "",
+    temp : 0,
+    address_full : "",
+    region : "",
+    cityORgu : "",
+    dongORmyun : "",
+    isMountain : false,
+    mountain_name: ""
+    
   };
 
   getWeather = async(latitude, longitude) => {
@@ -36,31 +46,53 @@ export default class extends React.Component { //class로 바꾼모습
       `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${API_KEY}&units=metric`
     )
     
-    this.setState({
-      isLoading: false,
-      condition: weather[0].main, // => 타입은 String임
-      temp
+    this.setState(preState =>{
+      return {
+        isLoading: false,
+        condition: weather[0].main, // => 타입은 String임
+        temp}
     });
   }
 
-  getMountain=async(address,region,city,dong)=>{
-    const payload={
+  getMountain=async(address,region,city,dong,latitude,longitude)=>{
+    this.getWeather(latitude, longitude);
+
+    const juso={
       address_full : address,
       region : region,
       cityORgu : city,
-      dongORmyun : dong 
+      dongORmyun : dong, 
     };
+
     fetch(`${API_URL}/main`,{
-      method: 'GET',
+      method: 'POST',
       headers : {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(juso),
+
     }).then(async res =>{
+     
       const jsonRes= await res.json();
+      console.log(jsonRes);
       if(res.status==200){
+        if(jsonRes.length==1){
+          //주변에 산이 한개일 경우
+          console.log(jsonRes[0]);
+          this.setState(preState=>{return {mountain_name : jsonRes[0].name}});
+        }
+        else{
+          
+          //주변 산이 여러개일 경우 : 리스트페이지 스택네비게이션으로 띄우기
+        }
 
       }
+      else if(res.status==404){
+        
+        console.log(jsonRes.message);
+        this.setState(preState=>{return {mountain_name : jsonRes.message}});
+      }
+      
 
     }).catch(e=>{
       console.log(e);
@@ -74,7 +106,7 @@ export default class extends React.Component { //class로 바꾼모습
 
       
       const {coords: {latitude, longitude, altitude}} = await Location.getCurrentPositionAsync({accuracy : Location.Accuracy.Highest}); //현재 위도,경도,고도 받아오기
-      this.getWeather(latitude, longitude);
+      
 
       const lat=latitude;
       const lon=longitude;
@@ -94,19 +126,26 @@ export default class extends React.Component { //class로 바꾼모습
       if(response.status==200){
         if(items.meta.total_count!=0){
           const isMountain =items.documents[0].address.mountain_yn=="Y"?true:false;
-          this.setState({
-            isLoading: true,
+          this.setState(preState => {
+            return {
             address_full : items.documents[0].address.address_name,
+            
             region : items.documents[0].address.region_1depth_name,
             cityORgu : items.documents[0].address.region_2depth_name,
             dongORmyun : items.documents[0].address.region_3depth_name,
-            isMountain : isMountain,
-          }); 
+            
+           isMountain : isMountain,
+          }}); 
 
-          this.getMountain(this.state.address_full,
-            this.state.region, 
-            this.state.cityORgu,
-            this.state.dongORmyun );
+          console.log(`현재위치 : ${items.documents[0].address.address_name}`);
+          this.getMountain(
+            items.documents[0].address.address_name,
+            items.documents[0].address.region_1depth_name, 
+            items.documents[0].address.region_2depth_name,
+            items.documents[0].address.region_3depth_name,
+            latitude,longitude);
+          //console.log(`getMountain 이후 : ${this.state.mountain_name}`);
+           //this.getWeather(latitude, longitude);
         }
         else{
           //위치를 잡을 수 없습니다.
@@ -128,10 +167,18 @@ export default class extends React.Component { //class로 바꾼모습
   }
 
   render(){
-    const { isLoading, temp, condition } = this.state;
-    //const { isLoading, temp, condition, mountain } = this.state;
+    
+    const { isLoading, temp, condition, address_full, mountain_name } = this.state;
+    
     return isLoading ? <WeatherLoading /> : 
-    ( <Weather temp={Math.round(temp)} condition={condition} />
+    ( <View>
+      <Weather temp={Math.round(temp)} condition={condition} />
+      <Text>현재위치 : {address_full}</Text>
+      <Text>주변에 있는 산 : {mountain_name}</Text>
+      <Text>현재날씨 : {condition}</Text>
+
+    
+    </View>
     ); 
    
   }

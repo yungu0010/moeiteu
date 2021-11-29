@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { render } from 'react-dom';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 //import BadgeList from './';
 
 const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2.2:8080'; 
@@ -9,6 +10,7 @@ const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2
 
 const Mypage = () => {
     var badges=new Array();
+    //var Badges=new Array();
     const[isgetbadge,setisget]=useState(false);
     const userID=1; //suhwa@gmail.com/suhwa/suhwa1234 계정의 아이디로 일단 
     
@@ -33,6 +35,12 @@ const Mypage = () => {
               var badge={ mountainID : bd.mountain_id, RD : bd.r_d, RF:bd.r_f, RS: bd.r_s};
               return badge;
            });
+
+           badges.map(( bd,index)=>{
+            console.log(`산이름 : ${bd.mountainID}`);
+          });
+
+
            setisget(true);
           }
          
@@ -46,16 +54,37 @@ const Mypage = () => {
           console.log(e);
       });
       
+      
     };
+
+    const renderItem=({item})=>{
+      return(
+        <View>
+           <Text>산이름: {item.mountainID}</Text>
+           <Text>rd: {item.RD}</Text>
+           <Text>rf: {item.RF}</Text>
+           <Text>rs: {item.RS}</Text>
+        </View>
+      );
+    };
+      
+
+
+
+   
 
   return (
       
       isgetbadge ? 
-      badges.map(bd=>{
-        return(
-          <Text>산이름 : {bd.mountainID}</Text>
-        )
-        })  
+      <View>
+        <TouchableOpacity style={styles.button2} onPress={takeBadges}>
+        <Text >내가 가지고 있는 뱃지들</Text> 
+        </TouchableOpacity>
+        <FlatList
+        data={badges}
+        renderItem={renderItem}/>
+      
+      </View>
       :
       <View>    
         <TouchableOpacity style={styles.button1} onPress={takeBadges}>

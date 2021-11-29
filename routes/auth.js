@@ -96,34 +96,33 @@ const isAuth = (req, res, next) => {
 };
 
 const getMountain=(req,res,next)=>{
-    //거리구하는 sql문
-    // SELECT name,
-    //        6371*acos(cos(radians(유저현재위도))*cos(radians(목표위도))*cos(radians(목표경도)-radians(현재경도))+sin(radians(현재위도))*sin(radians(목표위도)))) AS distance
-    // FROM moeiteu.mountain
-    // HAVING distance <=0.1  //현재위치로부터 100미터이내
-    // ORDER BY distance;
-    //이 sql문을 어찌 시퀄라이즈 쿼리로 바꾸노...
-
-// 아래의 sequelize.literal에 req의 유저현재위도,경도 어떻게 해야 넣을수 있을까?
-// having절을 시퀄라이즈로 어찌바꾸지?
+    
     Mountain.findAll({
-        attributes:[["name"],[Sequelize.literal("6371*acos(cos(radians(유저현재위도))*cos(radians(목표위도))*cos(radians(목표경도)-radians(현재경도))+sin(radians(현재위도))*sin(radians(목표위도)))"),"distance"],],
         where: {
-            // having distance<=0.1;
-        },
-        order: [["distance"]],
-    })//산을 찾는코드, 주변 약 100m이내에 산이 있을때?
-    //주변에 산이있다는 where 절 어찌하누...?
+            location : { [Op.like]: `%${req.dongOrmyun}%`}
+        }}
+    )
     .then(Mountain=>{
-        if(Mountain){
-            //여러개의 산중 가장 가까운산을 특정짓기
-            res.status(200).json({message: "산을 찾았다."});//res의 상태와 리턴은 무슨차이지?
-            return //weathersetting.js 페이지로 산이름 넣기 
+        if(Mountain){ 
+            return res.status(200).json(Mountain);
         }
-        else{
-            //주변에 산이없는것
+        else{//현재위치의 동or면or읍 단위에 해당하는 산이 없다.
+            Mountain.findAll({
+                where: {
+                    location : { [Op.like]: `%${req.cityORgu}%`}
+                }}
+            )
+            .then(Mountain=>{
+                if(Mountain){
+                    return res.status(200).json(Mountain);
+                }
+                else{//현재위치의 시or구에 해당하는 산이 없다.
+                    return res.status(404).json({message : "이 주변에는 산이 없습니다."});
+                }
+            })
+
         }
-    }); // 조회
+    }); 
 };
 
 module.exports = { signup, login, isAuth, getMountain};

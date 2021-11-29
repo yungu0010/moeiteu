@@ -14,20 +14,27 @@ const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 let Nlatitude, Nlongtitude
 
-const Map = () => {
+const Map =() => {
 
+    /*async ()=>{
+        await Location.requestForegroundPermissionsAsync();
+        const {coords: {lat, lon, altitude}} = await Location.getCurrentPositionAsync({accuracy : Location.Accuracy.Highest});
+    }*/
 
+     //현재 위도,경도,고도 받아오기
     // 사실 초기값은 읽어온 위도 경도 넣어야 할 것. weathersetting.js에서 읽어온걸..? 넣도록.
     // 근데 사실 onRegionChange 때문에 안해도 될 것 같긴함
     // 사용자 위치추적도 가능함 하고싶다면 사용할 것.
     const [location, setLocation]=useState({
         latitude: 37.5642135, // Nlatitude로 바꿀것
-        longitude: 127.0016985,
+        longitude:127.0016985,
         latitudeDelta: 0.1, // 얘네 늘이면 지도 확대율 지정됨
         longitudeDelta: 0.1,
     })
 
     console.log(location)
+    
+    
     return (
         <View style={styles.container}>
             <MapView

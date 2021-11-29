@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { render } from 'react-dom';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
@@ -7,13 +8,11 @@ const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2
 
 
 const Mypage = () => {
-    const[badges,setBadges]=useState([{moutain_id : 0, r_d : 0, r_f : 0, r_s : 0}]);//결과로 받은 뱃지들
+    var badges=new Array();
     const[isgetbadge,setisget]=useState(false);
-    const userID=1; //suhwa@gmail.com/suhwa/suhwa1234 계정의 아이디로 일단 박아둠
-  
+    const userID=1; //suhwa@gmail.com/suhwa/suhwa1234 계정의 아이디로 일단 
+    
     const takeBadges=()=>{
-       
-      console.log("이벤트 클릭\n");
 
       fetch(`${API_URL}/${userID}/badges`,
       {
@@ -25,17 +24,18 @@ const Mypage = () => {
       .then(async (res)=>{
         const jsonRes = await res.json();
         if(res.status==200){
-          //console.log(jsonRes);
-          res=jsonRes[0];
-          console.log(res);
-          console.log(res.UserID); //read-only라고 하네... 그럼 뭐 어쩌란건지
-          setisget(true);
-          //const Res=JSON.parse(jsonRes);
-          console.log(jsonRes.length);
-          //setBadges([...badges, res.moutain_id ]);
-            
-          
-          
+          console.log(`응답 개수 : ${jsonRes.length}`);
+          if(jsonRes.length==0){
+            //뱃지 없다고 알리기, UI랑 합치고나서 해야할듯
+          }
+          else{
+            badges=jsonRes.map((bd)=> {
+              var badge={ mountainID : bd.mountain_id, RD : bd.r_d, RF:bd.r_f, RS: bd.r_s};
+              return badge;
+           });
+           setisget(true);
+          }
+         
         }
         else if(res.status==404){
           console.log('404');
@@ -51,18 +51,11 @@ const Mypage = () => {
   return (
       
       isgetbadge ? 
-      <View>    
-      <TouchableOpacity style={styles.button2} onPress={takeBadges}>
-      <Text >내가 가지고 있는 뱃지들</Text> 
-      </TouchableOpacity>
-      {/*<Text>디비에서 받아온 뱃지들 : {Res}</Text>
-      
-      {badges.map(bd=>{
-            <Text>
-                
-                산이름 : {bd.moutain_id}</Text>
-        })} */}   
-    </View>
+      badges.map(bd=>{
+        return(
+          <Text>산이름 : {bd.mountainID}</Text>
+        )
+        })  
       :
       <View>    
         <TouchableOpacity style={styles.button1} onPress={takeBadges}>
@@ -103,7 +96,16 @@ export default Mypage;
 
 
 //왜 이파일만 추가하면 오류가 나는걸까?
-/*import React,{useState} from 'react';
+/*
+
+  {badges.map(bd=>{
+            <Text>
+                
+                산이름 : {bd.mountainID}</Text>
+        })}  
+
+
+import React,{useState} from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
 import {  Title, Caption, Text, TouchableRipple} from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';

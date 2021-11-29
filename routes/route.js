@@ -9,7 +9,10 @@ const getMountain = auth.getMountain;
 const user = require('./user');
 const follow = user.follow;
 const unfollow = user.unfollow;
-const search = user.search
+const search = user.search;
+
+const rate = require('./mntrate');
+const userRate = rate.userRate;
 
 const router = express.Router();
 
@@ -19,6 +22,8 @@ router.post('/signup', signup);
 router.post('/follow', follow);
 router.post('/unfollow', unfollow);
 router.post('/search', search);
+
+router.post('/rate', userRate);
 
 router.get('/main',getMountain);
 

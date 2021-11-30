@@ -5,7 +5,7 @@ import FoundationIcons from 'react-native-vector-icons/Foundation';
 import Map from '../screens/Map';
 import Main from "../screens/WeatherSetting";
 import Follow from "../screens/Follow"
-import Rating from '../screens/Rating'
+import Example from '../screens/Example'
 
 const Tab = createBottomTabNavigator();
 
@@ -15,9 +15,9 @@ export default function Navigator(){
         <Tab.Navigator initialRouteName="Home" screenOptions={{ tabBarActiveTintColor: '#9bbb7a',}}>
             <Tab.Screen
                 name="Posting"
-                component={Rating}
+                component={Example}
                 options={{
-                tabBarLabel: 'ranking',
+                tabBarLabel: 'posting',
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="post-outline" color={color} size={size} />
                 ),
@@ -25,7 +25,7 @@ export default function Navigator(){
             />
             <Tab.Screen
                 name="Ranking"
-                component={Rating}
+                component={Example}
                 options={{
                 tabBarLabel: 'ranking',
                 tabBarIcon: ({ color, size }) => (

@@ -5,6 +5,7 @@ import FoundationIcons from 'react-native-vector-icons/Foundation';
 import Map from '../screens/Map';
 import Main from "../screens/WeatherSetting";
 import Follow from "../screens/Follow"
+import Mypage from "../screens/MyPage"
 import Example from '../screens/Example'
 
 const Tab = createBottomTabNavigator();
@@ -14,12 +15,11 @@ export default function Navigator(){
     return (
         <Tab.Navigator initialRouteName="Home" screenOptions={{ tabBarActiveTintColor: '#9bbb7a',}}>
             <Tab.Screen
-                name="Posting"
-                component={Example}
+                name="Map"
+                component={Map}
                 options={{
-                tabBarLabel: 'posting',
                 tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name="post-outline" color={color} size={size} />
+                    <MaterialCommunityIcons name="map-marker-circle" color={color} size={size} />
                 ),
                 }}
             />
@@ -27,7 +27,6 @@ export default function Navigator(){
                 name="Ranking"
                 component={Example}
                 options={{
-                tabBarLabel: 'ranking',
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="clipboard-list" color={color} size={size} />
                 ),
@@ -37,7 +36,6 @@ export default function Navigator(){
                 name="Home"
                 component={Main}
                 options={{
-                tabBarLabel: 'home',
                 tabBarIcon: ({ color, size }) => (
                     <FoundationIcons name="mountains" color={color} size={size} />
                 ),
@@ -45,20 +43,18 @@ export default function Navigator(){
                 }}
             />
             <Tab.Screen
-                name="Map"
-                component={Map}
+                name="Follow"
+                component={Follow}
                 options={{
-                tabBarLabel: 'map',
                 tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name="map-marker-circle" color={color} size={size} />
+                    <MaterialCommunityIcons name="post-outline" color={color} size={size} />
                 ),
                 }}
             />
             <Tab.Screen
                 name="MyPage"
-                component={Follow}
+                component={Mypage}
                 options={{
-                tabBarLabel: 'mypage',
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="account-circle-outline" color={color} size={size} />
                 ),

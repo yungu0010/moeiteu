@@ -12,6 +12,9 @@ const unfollow = user.unfollow;
 const search = user.search;
 const badge = user.badge;
 
+const rate = require('./mntrate');
+const userRate = rate.userRate;
+
 const router = express.Router();
 
 router.post('/login', login);
@@ -21,6 +24,9 @@ router.post('/follow', follow);
 router.post('/unfollow', unfollow);
 router.post('/search', search);
 router.post('/badge', badge);
+
+router.post('/rate', userRate);
+
 router.get('/main',getMountain);
 
 router.get('/private', isAuth);

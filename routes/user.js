@@ -2,6 +2,8 @@ const User = require('../src/server/models/user');
 const Follow = require('../src/server/models/follow');
 const Record = require('../src/server/models/record');
 const Rating = require('../src/server/models/rating');
+const Rating=require('../src/server/models/rating');
+
 let mine;
 
 // mine에 있는 변수들 쿠키 혹은 res.local이면 다 바뀌어야함
@@ -91,4 +93,22 @@ const badge = async(req, res, next) => {
 
 }
 
-module.exports = {search,follow, unfollow, badge};
+const getBadge=(req,res,next)=>{
+    mine=1;
+    Rating.findAll({where: {UserId : mine}})
+    .then(async(dbBadge)=>{
+        if(dbBadge.length==0){
+            return res.status(404).json({message: "you have no badges"});
+        }else{
+            res.status(200).json(dbBadge);
+            //dbBadge.map( badge =>{
+              //  res.status(200).json({"mountain": badge.mountain_id, "user": UserId});
+            //});
+            
+        }
+        return res.end();
+    })
+
+}
+
+module.exports = {search,follow, unfollow, getBadge, badge};

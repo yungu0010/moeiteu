@@ -14,6 +14,7 @@ const badge = user.badge;
 
 const rate = require('./mntrate');
 const userRate = rate.userRate;
+const getBadge=user.getBadge;
 
 const router = express.Router();
 
@@ -26,8 +27,9 @@ router.post('/search', search);
 router.post('/badge', badge);
 
 router.post('/rate', userRate);
+router.get('/1/badges',getBadge);
 
-router.get('/main',getMountain);
+router.post('/main',getMountain);
 
 router.get('/private', isAuth);
 router.get('/public', (req, res, next) => {

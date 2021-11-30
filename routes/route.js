@@ -10,6 +10,7 @@ const user = require('./user');
 const follow = user.follow;
 const unfollow = user.unfollow;
 const search = user.search;
+const badge = user.badge;
 
 const rate = require('./mntrate');
 const userRate = rate.userRate;
@@ -22,6 +23,7 @@ router.post('/signup', signup);
 router.post('/follow', follow);
 router.post('/unfollow', unfollow);
 router.post('/search', search);
+router.post('/badge', badge);
 
 router.post('/rate', userRate);
 

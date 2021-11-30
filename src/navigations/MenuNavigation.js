@@ -1,28 +1,69 @@
-import React, {useState} from "react";
-import {BottomNavigation} from "react-native-paper";
+import React from "react";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FoundationIcons from 'react-native-vector-icons/Foundation';
 import Map from '../screens/Map';
 import Main from "../screens/WeatherSetting";
 import Follow from "../screens/Follow"
-import Rating from '../screens/Rating'
+import Example from '../screens/Example'
 
+const Tab = createBottomTabNavigator();
+
+// component에 맞는 페이지 알아서 넣어주심 됩니당
 export default function Navigator(){
-    const [index, setIndex] = useState(0);
-    const [routes] = useState([
-        {key: 'scene1', title: 'Posting', icon: 'post'},
-        {key: 'scene2', title: 'Ranking', icon: 'align-vertical-bottom'},
-        {key: 'scene3', title: 'Home', icon: 'home'},
-        {key: 'scene4', title: 'Map', icon: 'map-outline'},
-        {key: 'scene5', title: 'Profile', icon: 'account-circle'}
-    ]);
-    const renderScene = BottomNavigation.SceneMap({
-        // 여기 씬 있는데에 Test의 파일 넣으면 됨 Login, Signup 같은거 쓰면됨
-        // 근데 Login, Signup넣으면 에러남
-        scene1: Rating,
-        scene2: Main,
-        scene3: Main,
-        scene4: Map,
-        scene5: Follow,
-});
-    return <BottomNavigation navigationState={{index, routes}}
-onIndexChange={setIndex} renderScene={renderScene}/>;
+    return (
+        <Tab.Navigator initialRouteName="Home" screenOptions={{ tabBarActiveTintColor: '#9bbb7a',}}>
+            <Tab.Screen
+                name="Posting"
+                component={Example}
+                options={{
+                tabBarLabel: 'posting',
+                tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="post-outline" color={color} size={size} />
+                ),
+                }}
+            />
+            <Tab.Screen
+                name="Ranking"
+                component={Example}
+                options={{
+                tabBarLabel: 'ranking',
+                tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="clipboard-list" color={color} size={size} />
+                ),
+                }}
+            />
+            <Tab.Screen
+                name="Home"
+                component={Main}
+                options={{
+                tabBarLabel: 'home',
+                tabBarIcon: ({ color, size }) => (
+                    <FoundationIcons name="mountains" color={color} size={size} />
+                ),
+                //tabBarBadge: 3,
+                }}
+            />
+            <Tab.Screen
+                name="Map"
+                component={Map}
+                options={{
+                tabBarLabel: 'map',
+                tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="map-marker-circle" color={color} size={size} />
+                ),
+                }}
+            />
+            <Tab.Screen
+                name="MyPage"
+                component={Follow}
+                options={{
+                tabBarLabel: 'mypage',
+                tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="account-circle-outline" color={color} size={size} />
+                ),
+                }}
+            />
+        </Tab.Navigator>
+    )
 }

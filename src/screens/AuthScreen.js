@@ -85,6 +85,7 @@ const AuthScreen = ({navigation}) => {
     
     return (
         //<ImageBackground source={require('../public/images/gradient-back.jpeg')} style={styles.image}>
+        <View style={styles.container}>
             <View style={styles.card}>
                 <Text style={styles.heading}>{isLogin ? 'Login' : 'Signup'}</Text>
                 <View style={styles.form}>
@@ -102,6 +103,7 @@ const AuthScreen = ({navigation}) => {
                     </View>    
                 </View>
             </View>
+            </View>
         //</ImageBackground>
     );
 };
@@ -114,19 +116,16 @@ const styles = StyleSheet.create({
     },  
     card: {
         flex: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
-        width: '80%',
-        marginTop: '40%',
-        borderRadius: 20,
-        maxHeight: 380,
+        marginTop: '35%',
+        // maxHeight: 380,
         paddingBottom: '30%',
     },
     heading: {
         fontSize: 30,
         fontWeight: 'bold',
         marginLeft: '10%',
-        marginTop: '5%',
-        marginBottom: '30%',
+        // marginTop: '5%',
+        // marginBottom: '30%',
         color: 'black',
     },
     form: {
@@ -148,6 +147,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         fontSize: 16, 
         minHeight: 40,
+        color: 'black'
     },
     button: {
         width: '80%',
@@ -182,6 +182,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginVertical: '5%',
     },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    }
 });
 
 export default AuthScreen;

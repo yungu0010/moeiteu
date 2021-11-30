@@ -4,13 +4,12 @@ import Weather from './Weather';
 import WeatherLoading from './WeatherLoading';
 import * as Location from 'expo-location';
 import axios from 'axios';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Dimensions} from 'react-native';
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2.2:8080'; 
-const API_KEY ="0378f839f05bd16fb2624b36317a1672";
+const API_KEY =process.env.API;
 const mountainId=1
 const myId=2
 

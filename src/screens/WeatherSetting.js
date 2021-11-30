@@ -9,7 +9,7 @@ import { StyleSheet, Text, View, Dimensions} from 'react-native';
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 const API_URL = Platform.OS === 'ios' ? 'http://localhost:8080' : 'http://10.0.2.2:8080'; 
-const API_KEY =process.env.API;
+const API_KEY
 const mountainId=1
 const myId=2
 
